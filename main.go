@@ -10,4 +10,10 @@ func main() {
 	color.Red("Dies ist ein roter Text")
 	color.Green("Dies ist ein grüner Text")
 	color.Blue("Dies ist ein blauer Text")
+
+}
+
+func Add(a int, b int) int {
+	// Test Workflow
+	return a + b
 }
