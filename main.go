@@ -1,7 +1,13 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"github.com/fatih/color"
+)
 
 func main() {
 	fmt.Println("Hello, World!")
+	color.Red("Dies ist ein roter Text")
+	color.Green("Dies ist ein grüner Text")
+	color.Blue("Dies ist ein blauer Text")
 }
