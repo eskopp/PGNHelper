@@ -1,8 +1,16 @@
 name: Go Test Workflow
 
 on:
-  push: {}
-  pull_request: {}
+  push:
+    paths:
+      - '**.go'
+      - 'go.mod'
+      - 'go.sum'
+  pull_request:
+    paths:
+      - '**.go'
+      - 'go.mod'
+      - 'go.sum'
 
 jobs:
   test:
@@ -17,6 +25,14 @@ jobs:
 
       - name: Check out code
         uses: actions/checkout@v4
+
+      - name: Cache Go modules
+        uses: actions/cache@v3
+        with:
+          path: ~/go/pkg/mod
+          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-go-
 
       - name: Test
         run: go test ./... -v
