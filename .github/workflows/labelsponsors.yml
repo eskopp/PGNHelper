@@ -11,7 +11,7 @@ jobs:
     name: is-sponsor-label
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: Add sponsor label to PRs and Issues
         uses: JasonEtco/is-sponsor-label-action@v2
