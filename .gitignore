@@ -1,0 +1,39 @@
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+*.ids
+
+# GoLand
+# (GoLand-spezifische Dateien sind meist in .idea enthalten)
+
+# Go
+# Binaries
+/bin/
+
+# Object files
+*.o
+*.a
+
+# Compiled Go source files
+*.cgo1.go
+*.cgo2.c
+
+# Generated files
+_gen.go
+
+# Output of the go coverage tool
+*.cover
+
+# Profile outputs
+*.out
+
+# Dependency directories (remove the comment if you want to ignore these)
+# /vendor/
+# /pkg/
+
+# Miscellaneous
+.DS_Store
+*.swp
+*~
