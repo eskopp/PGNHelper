@@ -1,16 +1,8 @@
 name: Go Test Workflow
 
 on:
-  push:
-    paths:
-      - '**.go'
-      - 'go.mod'
-      - 'go.sum'
-  pull_request:
-    paths:
-      - '**.go'
-      - 'go.mod'
-      - 'go.sum'
+  push: {}
+  pull_request: {}
 
 jobs:
   test:
