@@ -11,22 +11,16 @@ func main() {
 	color.Green("Dies ist ein grüner Text")
 	color.Blue("Dies ist ein blauer Text")
 
-	myGame := Game{
-		Event: "Weltmeisterschaft",
-		Site:  "New York",
-		Date:  "2024.01.24",
-		Round: "1",
+	pgnFile := "./test/test.pgn"
+
+	games, err := parsePGNFile(pgnFile)
+	if err != nil {
+		fmt.Println("Fehler beim Parsen der PGN-Datei:", err)
+		return
 	}
 
-	// Zugriff auf die Felder des Game-Objekts
-	fmt.Println("Event:", myGame.Event)
-	fmt.Println("Site:", myGame.Site)
-	fmt.Println("Date:", myGame.Date)
-	fmt.Println("Round:", myGame.Round)
-
-}
-
-func Add(a int, b int) int {
-	// Test Workflow
-	return a + b
+	for _, game := range games {
+		fmt.Printf("Event: %s\nSite: %s\nDate: %s\nRound: %s\nWhite: %s\nBlack: %s\nResult: %s\nOpening: %s\nECO: %s\nMoves: %s\n\n",
+			game.Event, game.Site, game.Date, game.Round, game.White, game.Black, game.Result, game.Opening, game.ECO, game.Moves)
+	}
 }
