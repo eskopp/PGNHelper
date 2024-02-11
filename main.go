@@ -24,3 +24,8 @@ func main() {
 			game.Event, game.Site, game.Date, game.Round, game.White, game.Black, game.Result, game.Opening, game.ECO, game.Moves)
 	}
 }
+
+func Add(a int, b int) int {
+	// Test Workflow
+	return a + b
+}
