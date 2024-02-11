@@ -24,6 +24,9 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v4
 
+      - name: List directory content
+        run: ls -la
+
       - name: Cache Go modules
         uses: actions/cache@v4
         with:
