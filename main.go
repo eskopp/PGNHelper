@@ -26,6 +26,5 @@ func main() {
 }
 
 func Add(a int, b int) int {
-	// Test Workflow
 	return a + b
 }

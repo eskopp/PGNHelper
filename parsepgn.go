@@ -7,20 +7,6 @@ import (
 	"strings"
 )
 
-// Game-Struct, das die Details eines Schachspiels hält
-type Game struct {
-	Event   string
-	Site    string
-	Date    string
-	Round   string
-	White   string
-	Black   string
-	Result  string
-	Opening string
-	ECO     string
-	Moves   string
-}
-
 // parsePGNFile liest die angegebene PGN-Datei und extrahiert die Schachspiele
 func parsePGNFile(filePath string) ([]Game, error) {
 	file, err := os.Open(filePath)
