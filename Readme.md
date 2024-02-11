@@ -27,5 +27,5 @@ sudo cp PGNHelper /usr/local/bin/pgn
 ### Help
 The help flag allows you to view the help view. There you will find all information and hints.
 ```bash
-PGNHelper -help
+pgn -help
 ```
