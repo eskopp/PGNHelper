@@ -1,5 +1,4 @@
-name: Go Test and Build Workflow
-
+name: Go Test and Build on Windows
 on:
   push:
     branches:
