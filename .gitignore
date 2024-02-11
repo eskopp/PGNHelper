@@ -38,19 +38,17 @@ _gen.go
 *.swp
 *~
 
-
 # Binaries
 *.exe
 ./test/*.exe
-
 
 # JSON
 *.json
 ./test/*.json
 .\test\*.json
 
-
-
 # Test Files
 ./test/*
 !./test/games.pgn
+
+*PGNHelper*
