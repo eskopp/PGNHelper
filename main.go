@@ -19,10 +19,15 @@ func main() {
 		return
 	}
 
-	for _, game := range games {
-		fmt.Printf("Event: %s\nSite: %s\nDate: %s\nRound: %s\nWhite: %s\nBlack: %s\nResult: %s\nOpening: %s\nECO: %s\nMoves: %s\n\n",
-			game.Event, game.Site, game.Date, game.Round, game.White, game.Black, game.Result, game.Opening, game.ECO, game.Moves)
-	}
+	/*
+			for _, game := range games {
+				fmt.Printf("Event: %s\nSite: %s\nDate: %s\nRound: %s\nWhite: %s\nBlack: %s\nResult: %s\nOpening: %s\nECO: %s\nMoves: %s\n\n",
+					game.Event, game.Site, game.Date, game.Round, game.White, game.Black, game.Result, game.Opening, game.ECO, game.Moves)
+			}
+		}
+
+	*/
+	printAllGames(games)
 }
 
 func Add(a int, b int) int {
