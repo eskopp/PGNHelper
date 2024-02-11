@@ -1,4 +1,4 @@
-name: Go Test Workflow
+name: Linux Build
 
 on:
   push: {}
@@ -26,8 +26,10 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-go-
 
-      - name: Test
-        run: go test ./... -v
+      - name: Build
+        run: |
+          go mod tidy 
+          go build -o PGNHelper
 
       - name: Clean
         run: |

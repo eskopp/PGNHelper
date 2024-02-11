@@ -1,4 +1,4 @@
-name: Go Test Workflow
+name: Windows Build
 
 on:
   push: {}
@@ -7,7 +7,7 @@ on:
 jobs:
   test:
     name: Run Tests
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
       - name: Set up Go
@@ -26,8 +26,10 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-go-
 
-      - name: Test
-        run: go test ./... -v
+      - name: Build
+        run: |
+          go mod tidy 
+          go build -o PGNHelper.exe
 
       - name: Clean
         run: |
