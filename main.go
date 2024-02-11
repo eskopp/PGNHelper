@@ -1,23 +1,42 @@
-// main.go
-
 package main
 
+import (
+	"flag"
+)
+
 func main() {
-	pgnFilePath := "./test/test.pgn"
-	jsonFilePath := "./test/games.json"
-	outputFile := "./test/parse.pgn"
 
-	if err := parsePGNFile(pgnFilePath, jsonFilePath); err != nil {
-		panic(err)
+	// Flag für die Hilfe
+	helpFlag := flag.Bool("help", false, "Zeigt die Hilfe an.")
+
+	// Flags für das Parsen einer PGN-Datei und einer JSON-Datei, als boolesche Schalter
+	parsePGNFlag := flag.Bool("parsePGN", false, "Verarbeitet eine PGN-Datei.")
+	parseJSONFlag := flag.String("parseJSON", "", "Pfad zur JSON-Datei, die geparst werden soll.")
+
+	// Eigene Hilfe-Funktion einrichten
+	flag.Usage = pgnHelp
+
+	// Parsen der Flags
+	flag.Parse()
+
+	// Help Flag
+	if *helpFlag {
+		pgnHelp()
+		return
 	}
-	if err := parseJSONFile(jsonFilePath, outputFile); err != nil {
-		panic(err)
+
+	// Parse PGN Flag - boolescher Schalter
+	if *parsePGNFlag {
+		parsepgn() // Keine Argumente mehr erforderlich
+		return
 	}
 
-	println("true")
-}
+	// Parse JSON Flag
+	if *parseJSONFlag != "" {
+		parsejson()
+		return
+	}
 
-// Add only for Workflow
-func Add(a, b int) int {
-	return a + b
+	// Wenn keine Flag gesetzt wird
+	noflag()
 }
