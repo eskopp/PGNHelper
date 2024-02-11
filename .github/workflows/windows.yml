@@ -1,4 +1,4 @@
-name: Go Test and Build on Windows
+name: Windows
 on:
   push:
     branches:
