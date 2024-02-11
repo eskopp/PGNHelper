@@ -6,10 +6,7 @@ import (
 )
 
 func main() {
-	fmt.Println("Hello, World!")
-	color.Red("Dies ist ein roter Text")
-	color.Green("Dies ist ein grüner Text")
-	color.Blue("Dies ist ein blauer Text")
+	color.Blue("PGN Helper")
 
 	pgnFile := "./test/test.pgn"
 
@@ -19,14 +16,7 @@ func main() {
 		return
 	}
 
-	/*
-			for _, game := range games {
-				fmt.Printf("Event: %s\nSite: %s\nDate: %s\nRound: %s\nWhite: %s\nBlack: %s\nResult: %s\nOpening: %s\nECO: %s\nMoves: %s\n\n",
-					game.Event, game.Site, game.Date, game.Round, game.White, game.Black, game.Result, game.Opening, game.ECO, game.Moves)
-			}
-		}
-
-	*/
+	// TODO: better output
 	printAllGames(games)
 }
 
