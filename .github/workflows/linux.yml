@@ -25,18 +25,8 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v4
 
-      # Listet den Inhalt des Arbeitsverzeichnisses auf, um zu überprüfen, ob alle Dateien korrekt ausgecheckt wurden
       - name: List directory content
         run: ls -la
-
-      # Cachet die Go-Module, um die Build-Zeit zu verringern
-      - name: Cache Go modules
-        uses: actions/cache@v4
-        with:
-          path: ~/go/pkg/mod
-          key: ${{ runner.os }}-go-${{ matrix.go-version }}-${{ hashFiles('go.sum') }}
-          restore-keys: |
-            ${{ runner.os }}-go-${{ matrix.go-version }}-
 
       - name: Test
         run: go test ./... -v
@@ -58,19 +48,9 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v4
 
-      # Wiederholt die Caching-Schritte für den Build-Prozess
-      - name: Cache Go modules
-        uses: actions/cache@v4
-        with:
-          path: ~/go/pkg/mod
-          key: ${{ runner.os }}-go-${{ matrix.go-version }}-${{ hashFiles('go.sum') }}
-          restore-keys: |
-            ${{ runner.os }}-go-${{ matrix.go-version }}-
-
       - name: Build
         run: go build -o PGNHelper
 
-      # Bereinigt das Arbeitsverzeichnis nach dem Build
       - name: Clean
         run: |
           git clean -fX

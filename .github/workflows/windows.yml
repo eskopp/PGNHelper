@@ -28,15 +28,6 @@ jobs:
       - name: List directory content
         run: dir
 
-      - name: Cache Go modules
-        uses: actions/cache@v4
-        with:
-          # Anpassung des Pfades für Windows
-          path: ~\go\pkg\mod
-          key: ${{ runner.os }}-go-${{ matrix.go-version }}-${{ hashFiles('go.sum') }}
-          restore-keys: |
-            ${{ runner.os }}-go-${{ matrix.go-version }}-
-
       - name: Test
         run: go test ./... -v
         shell: pwsh
@@ -57,15 +48,6 @@ jobs:
 
       - name: Check out code
         uses: actions/checkout@v4
-
-      - name: Cache Go modules
-        uses: actions/cache@v4
-        with:
-          # Anpassung des Pfades für Windows
-          path: ~\go\pkg\mod
-          key: ${{ runner.os }}-go-${{ matrix.go-version }}-${{ hashFiles('go.sum') }}
-          restore-keys: |
-            ${{ runner.os }}-go-${{ matrix.go-version }}-
 
       - name: Build
         run: go build -o PGNHelper.exe
