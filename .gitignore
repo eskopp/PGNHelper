@@ -37,3 +37,20 @@ _gen.go
 .DS_Store
 *.swp
 *~
+
+
+# Binaries
+*.exe
+./test/*.exe
+
+
+# JSON
+*.json
+./test/*.json
+.\test\*.json
+
+
+
+# Test Files
+./test/*
+!./test/games.pgn

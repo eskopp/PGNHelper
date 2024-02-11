@@ -1,0 +1,52 @@
+[
+    {
+        "tags": {
+            "Black": "Kasparov, Garry",
+            "Date": "1997.05.11",
+            "ECO": "B17",
+            "Event": "IBM Kasparov vs. Deep Blue Rematch",
+            "Opening": "Caro-Kann: 4...Nd7",
+            "Result": "1-0",
+            "Round": "6",
+            "Site": "New York, NY USA",
+            "White": "Deep Blue"
+        },
+        "moves": "1.e4 c6 2.d4 d5 3.Nc3 dxe4 4.Nxe4 Nd7 5.Ng5 Ngf6 6.Bd3 e6 7.N1f3 h6 8.Nxe6 Qe7 9.O-O fxe6 10.Bg6+ Kd8 {Kasparov schüttelt kurz den Kopf} 11.Bf4 b5 12.a4 Bb7 13.Re1 Nd5 14.Bg3 Kc8 15.axb5 cxb5 16.Qd3 Bc6 17.Bf5 exf5 18.Rxe7 Bxe7 19.c4 1-0 "
+    },
+    {
+        "tags": {
+            "Black": "piotr",
+            "BlackElo": "2125",
+            "Datum": "2010.10.26",
+            "Ereignis": "Chess.com Staff Tournament #2",
+            "Result": "1-0",
+            "Site": "Chess.com",
+            "Termination": "ACEChess won by resignation",
+            "TimeControl": "1 in 3 days",
+            "White": "ACEChess",
+            "WhiteElo": "2037"
+        },
+        "moves": "1.e4 d5 2.exd5 Nf6 3.d4 Nxd5 4.c4 Nb6 5.Nc3 g6 6.Be3 Bg7 7.h3 O-O 8.Qd2 Nc6 9.Nf3 e5 10.d5 Ne7 11.g4 f5 12.O-O-O e4 13.Ng5 h6 14.Ne6 Bxe6 15.dxe6 Qxd2+ 16.Rxd2 Rad8 17.Bc5 Rxd2 18. Kxd2 Rd8+ 19.Kc2 Nc6 20.gxf5 Nd4+ 21.Bxd4 Rxd4 22.Rg1 g5 23.c5 Nc4 24.Bxc4 Rxc4 25.Rd1 Bf6 26.Kb3 Rxc5 27.Nxe4 Rxf5 28.Nxf6+ Kf8 29.Ng4 h5 30.Ne3 Rf3 31.Rd5 g4 32.hxg4 1-0 "
+    },
+    {
+        "tags": {
+            "Annotator": "Skopp, Erik",
+            "Black": "Hartung, Markus",
+            "BlackElo": "1584",
+            "BlackTeam": "Ilmenauer SV",
+            "Date": "2024.01.20",
+            "ECO": "A28",
+            "Event": "Vereinsmeisterschaft Ilmenauer SV 2024",
+            "EventDate": "2024.??.??",
+            "PlyCount": "65",
+            "Result": "1/2-1/2",
+            "Round": "1.6",
+            "Site": "Ilmenauer SV, EAZ Ilmenau",
+            "SourceTitle": "Skopp, Erik",
+            "White": "Eisenbach, Markus",
+            "WhiteElo": "1404",
+            "WhiteTeam": "Ilmenauer SV"
+        },
+        "moves": "{[%evp 9,65,-141,51,-7,63,1,0,0,20,-6,18,15,25,21,23,-20,34,-7,-5,-9,-15,-11,-6,-23,176,138,311,312,456,336,313,315,468,423,458,386,379,360,350,173,296,28,40,27,25,25,99,0,375,330,330,0,0,0,0,0,0,0]} 1. c4 e5 2. Nc3 Nf6 3. Nf3 Nc6 4. e4 Bc5 5. d3 h6 $2 {[%eval 51,30] [%wdl 92,908,0]} (5... Ng4 $1 $17 {[%eval -141,32] [%wdl 0,77,923][%cal Rg4f2]} 6. d4 (6. Bg5 $2 Bxf2+ 7. Kd2 f6 $19) 6... exd4) 6. Be2 {[%eval -7,36] [%wdl 4,987,9] A28: English Opening: Four Knights Variation.} ({Better is} 6. Nxe5 $1 $14 {[%eval 51,30] [%wdl 92,908,0]} Nxe5 7. d4) 6... a6 {[%eval 63,27] [%wdl 155,845,0]} (6... d6 $11 {[%eval -7,36] [%wdl 4,987,9]}) 7. a3 {[%eval 1,40] [%wdl 6,988,6]} (7. Nxe5 $1 $14 {[%eval 63,27] [%wdl 155,845,0]} Nxe5 8. d4) 7... d6 8. h3 Be6 {[#]} 9. Be3 $146 (9. b4 $5 {[%cal Rb4c5]} Ba7 10. Be3 $11) ({Predecessor:} 9. O-O Qd7 10. Be3 Nd4 11. Bxd4 exd4 12. Nd5 c6 13. Nf4 g5 14. Nxe6 Qxe6 15. Nh2 {½-½ (32) Rosario Almanzar,R (1882)-Yakubbaeva,N (2299) Chennai 2022}) 9... Bxe3 10. fxe3 O-O {[%cal Ob7b5]} 11. O-O Ne7 12. c5 {[%eval -20,34] [%wdl 2,982,16]} d5 {[%eval 34,37] [%wdl 33,966,1]} ({Black should play} 12... Ng6 $11 {[%eval -20,34] [%wdl 2,982,16]}) 13. exd5 {[%eval -7,40] [%wdl 3,990,7]} (13. Nxe5 $14 {[%eval 34,37] [%wdl 33,966,1]} d4 14. Nb1) 13... Nexd5 $11 14. Qd2 Nxc3 {[%csl Od3][%mdl 64] Remove Defender} 15. Qxc3 e4 16. Nd4 Bd5 $2 {[%eval 176,30] [%wdl 988,12,0]} (16... Nd5 $11 {[%eval -23,44] [%wdl 1,982,17]} 17. Qd2 Qg5 18. Nxe6 fxe6) 17. Nf5 {[%eval 138,28] [%wdl 909,91,0]} (17. Rad1 $18 {[%eval 176,30] [%wdl 988,12,0]}) 17... exd3 $2 {[%eval 311,31] [%wdl 1000,0,0]} (17... Be6 $16 {[%eval 138,28] [%wdl 909,91,0]}) 18. Bxd3 $18 Re8 {[%eval 456,30] [%wdl 1000,0,0] [#]} (18... Be6 $142 {[%eval 312,32] [%wdl 1000,0,0]} 19. Nxh6+ Kh8) 19. Nxh6+ $1 {[%mdl 576] Deflection} Kf8 20. Nf5 {Repels Qe7} Re6 {[%eval 468,30] [%wdl 1000,0,0]} (20... Be6 $142 {[%eval 315,32] [%wdl 1000,0,0]} 21. e4 Kg8) 21. Rae1 Bc6 22. Nd4 Re8 23. Nxc6 bxc6 24. b4 {[%eval 173,31] [%wdl 985,15,0]} (24. e4 $142 {[%eval 350,27] [%wdl 1000,0,0]}) 24... a5 {[%eval 296,25] [%wdl 1000,0,0]} (24... Nd5 {[%eval 173,31] [%wdl 985,15,0] might work better.} 25. Qc1 Nf6) 25. Qb3 $2 {[%eval 28,40] [%wdl 20,979,1]} ({But not} 25. bxa5 $6 Nd5 26. Qd2 Nf6 $16) (25. e4 $18 {[%eval 296,25] [%wdl 1000,0,0]}) 25... Qd7 26. Bc4 {Qc2 would now be deadly.} axb4 27. axb4 {With the idea Rd1.} Re7 {[%eval 99,29] [%wdl 508,492,0] [#]} (27... Re4 $11 {[%eval 25,36] [%wdl 17,982,1] keeps the balance.}) 28. e4 {[%eval 0,36] [%wdl 4,992,4]} Rae8 $2 {[%eval 375,45] [%wdl 1000,0,0][%mdl 8192]} (28... Qd4+ $11 {[%eval 0,36] [%wdl 4,992,4] and Black stays safe.} 29. Kh2 Rae8) 29. Rd1 Qc8 {[#]} 30. e5 {[%eval 0,54] [%wdl 4,992,4]} Rxe5 $11 {The position is equal.} 31. Bxf7 Re3 32. Qc4 R3e4 33. Qb3 {Weighted Error Value: White=0.66/Black=0.80.  Loses game:     \t---       \tBlack=3      Missed win:     \tWhite=2     \t---        Mistake:       \tWhite=6     \tBlack=6      Inaccurate:     \tWhite=1     \t---        OK:         \tWhite=4     \tBlack=8      Best:        \tWhite=1     \tBlack=2} 1/2-1/2 "
+    }
+]

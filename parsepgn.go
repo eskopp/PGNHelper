@@ -1,49 +1,50 @@
 package main
 
 import (
+	"bufio"
 	"encoding/json"
-	"gopkg.in/freeeve/pgn.v1"
 	"os"
+	"strings"
 )
 
-// GameData hält die Daten einer Schachpartie für die JSON-Konvertierung.
-type GameData struct {
-	Tags  map[string]string `json:"tags"`
-	Moves []string          `json:"moves"`
-}
-
-// parsePGNFileToJSON liest eine PGN-Datei und konvertiert sie in eine JSON-Datei.
-func parsePGNFileToJSON(pgnFilePath, jsonFilePath string) error {
-	f, err := os.Open(pgnFilePath)
+// parsePGNFile liest eine PGN-Datei und konvertiert sie in eine JSON-Datei.
+func parsePGNFile(pgnFilePath, jsonFilePath string) error {
+	file, err := os.Open(pgnFilePath)
 	if err != nil {
 		return err
 	}
-	defer f.Close()
+	defer file.Close()
 
-	ps := pgn.NewPGNScanner(f)
-	var games []GameData
+	scanner := bufio.NewScanner(file)
+	var games []Game
+	currentGame := Game{Tags: make(map[string]string)}
+	var movesBuilder strings.Builder
 
-	for ps.Next() {
-		game, err := ps.Scan()
-		if err != nil {
-			return err
+	for scanner.Scan() {
+		line := scanner.Text()
+		if strings.HasPrefix(line, "[") {
+			tagContents := line[1:strings.LastIndex(line, "]")]
+			parts := strings.SplitN(tagContents, " ", 2)
+			if len(parts) == 2 {
+				key := parts[0]
+				value := strings.Trim(parts[1], "\"")
+				currentGame.Tags[key] = value
+			}
+		} else if line != "" {
+			movesBuilder.WriteString(line + " ")
+		} else if movesBuilder.Len() > 0 {
+			currentGame.Moves = movesBuilder.String()
+			games = append(games, currentGame)
+			currentGame = Game{Tags: make(map[string]string)}
+			movesBuilder.Reset()
 		}
-
-		gameData := GameData{
-			Tags: game.Tags,
-			Moves: func(moves []pgn.Move) []string {
-				var ms []string
-				for _, m := range moves {
-					ms = append(ms, m.String())
-				}
-				return ms
-			}(game.Moves),
-		}
-
-		games = append(games, gameData)
+	}
+	if movesBuilder.Len() > 0 || len(currentGame.Tags) > 0 {
+		currentGame.Moves = movesBuilder.String()
+		games = append(games, currentGame)
 	}
 
-	jsonData, err := json.MarshalIndent(games, "", "  ")
+	jsonData, err := json.MarshalIndent(games, "", "    ")
 	if err != nil {
 		return err
 	}
