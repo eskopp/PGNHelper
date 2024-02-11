@@ -3,21 +3,19 @@ package main
 import (
 	"fmt"
 	"github.com/fatih/color"
+	"log"
 )
 
 func main() {
 	color.Blue("PGN Helper")
 
-	pgnFile := "./test/test.pgn"
+	pgnFile, jsonFile := "./test/test.pgn", "./test/games.json"
 
-	games, err := parsePGNFile(pgnFile)
-	if err != nil {
-		fmt.Println("Fehler beim Parsen der PGN-Datei:", err)
-		return
+	if err := parsePGNFileToJSON(pgnFile, jsonFile); err != nil {
+		log.Fatalf("Fehler beim Konvertieren der PGN-Datei in JSON: %v", err)
 	}
 
-	// TODO: better output
-	printAllGames(games)
+	fmt.Println("Die PGN-Datei wurde erfolgreich in JSON konvertiert.")
 }
 
 func Add(a int, b int) int {

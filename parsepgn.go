@@ -1,73 +1,56 @@
 package main
 
 import (
-	"bufio"
+	"encoding/json"
+	"gopkg.in/freeeve/pgn.v1"
 	"os"
-	"regexp"
-	"strings"
 )
 
-// parsePGNFile liest die angegebene PGN-Datei und extrahiert die Schachspiele
-func parsePGNFile(filePath string) ([]Game, error) {
-	file, err := os.Open(filePath)
-	if err != nil {
-		return nil, err
-	}
-	defer file.Close()
-
-	scanner := bufio.NewScanner(file)
-	var lines []string
-	for scanner.Scan() {
-		lines = append(lines, scanner.Text())
-	}
-
-	if err := scanner.Err(); err != nil {
-		return nil, err
-	}
-
-	pgnText := strings.Join(lines, "\n")
-	return parsePGN(pgnText), nil
+// GameData hält die Daten einer Schachpartie für die JSON-Konvertierung.
+type GameData struct {
+	Tags  map[string]string `json:"tags"`
+	Moves []string          `json:"moves"`
 }
 
-// parsePGN verarbeitet den gegebenen PGN-Text und extrahiert jedes Spiel
-func parsePGN(pgn string) []Game {
-	var games []Game
-	gameStrings := strings.Split(pgn, "\n\n\n")
-	for _, gameString := range gameStrings {
-		var game Game
-		metaRe := regexp.MustCompile(`\[(\w+) "(.*?)"\]`)
-		metaMatches := metaRe.FindAllStringSubmatch(gameString, -1)
-
-		for _, match := range metaMatches {
-			switch match[1] {
-			case "Event":
-				game.Event = match[2]
-			case "Site":
-				game.Site = match[2]
-			case "Date":
-				game.Date = match[2]
-			case "Round":
-				game.Round = match[2]
-			case "White":
-				game.White = match[2]
-			case "Black":
-				game.Black = match[2]
-			case "Result":
-				game.Result = match[2]
-			case "Opening":
-				game.Opening = match[2]
-			case "ECO":
-				game.ECO = match[2]
-			}
-		}
-
-		movesStartIndex := metaRe.FindAllStringIndex(gameString, -1)
-		if len(movesStartIndex) > 0 {
-			lastMatch := movesStartIndex[len(movesStartIndex)-1]
-			game.Moves = strings.TrimSpace(gameString[lastMatch[1]:])
-		}
-
-		games = append(games, game)
+// parsePGNFileToJSON liest eine PGN-Datei und konvertiert sie in eine JSON-Datei.
+func parsePGNFileToJSON(pgnFilePath, jsonFilePath string) error {
+	f, err := os.Open(pgnFilePath)
+	if err != nil {
+		return err
 	}
-	return games
+	defer f.Close()
+
+	ps := pgn.NewPGNScanner(f)
+	var games []GameData
+
+	for ps.Next() {
+		game, err := ps.Scan()
+		if err != nil {
+			return err
+		}
+
+		gameData := GameData{
+			Tags: game.Tags,
+			Moves: func(moves []pgn.Move) []string {
+				var ms []string
+				for _, m := range moves {
+					ms = append(ms, m.String())
+				}
+				return ms
+			}(game.Moves),
+		}
+
+		games = append(games, gameData)
+	}
+
+	jsonData, err := json.MarshalIndent(games, "", "  ")
+	if err != nil {
+		return err
+	}
+
+	if err := os.WriteFile(jsonFilePath, jsonData, 0644); err != nil {
+		return err
+	}
+
+	return nil
 }
