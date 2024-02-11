@@ -6,10 +6,13 @@ import (
 
 func main() {
 
+	// Überprüfung auf unbekannte Flags, bevor `flag.Parse()` aufgerufen wird
+	checkForUnknownFlags()
+
 	// Flag für die Hilfe
 	helpFlag := flag.Bool("help", false, "Zeigt die Hilfe an.")
 
-	// Flags für das Parsen einer PGN-Datei und einer JSON-Datei, als boolesche Schalter
+	// Flags für das Parsen einer PGN-Datei und einer JSON-Datei
 	parsePGNFlag := flag.Bool("parsePGN", false, "Verarbeitet eine PGN-Datei.")
 	parseJSONFlag := flag.String("parseJSON", "", "Pfad zur JSON-Datei, die geparst werden soll.")
 
@@ -25,9 +28,9 @@ func main() {
 		return
 	}
 
-	// Parse PGN Flag - boolescher Schalter
+	// Parse PGN Flag
 	if *parsePGNFlag {
-		parsepgn() // Keine Argumente mehr erforderlich
+		parsepgn()
 		return
 	}
 

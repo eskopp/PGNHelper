@@ -4,3 +4,28 @@
 # PGN Helper
 
 [![Windows](https://github.com/eskopp/PGNHelper/actions/workflows/windows.yml/badge.svg)](https://github.com/eskopp/PGNHelper/actions/workflows/windows.yml) [![Linux](https://github.com/eskopp/PGNHelper/actions/workflows/linux.yml/badge.svg)](https://github.com/eskopp/PGNHelper/actions/workflows/linux.yml)
+
+## Build
+
+```bash
+git clone https://github.com/eskopp/PGNHelper.git
+cd PGNHelper
+git checkout main
+git pull 
+go mod tidy
+go test -v
+go build -o PGNHelper
+```
+
+## Install
+```bash
+sudo cp PGNHelper /usr/local/bin/pgn
+```
+
+## Usage
+
+### Help
+The help flag allows you to view the help view. There you will find all information and hints.
+```bash
+PGNHelper -help
+```
