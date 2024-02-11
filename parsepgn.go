@@ -7,13 +7,18 @@ import (
 	"strings"
 )
 
-// parsePGNFile liest eine PGN-Datei und konvertiert sie in eine JSON-Datei.
+// parsePGNFile convert to json
 func parsePGNFile(pgnFilePath, jsonFilePath string) error {
 	file, err := os.Open(pgnFilePath)
 	if err != nil {
 		return err
 	}
-	defer file.Close()
+	defer func(file *os.File) {
+		err := file.Close()
+		if err != nil {
+
+		}
+	}(file)
 
 	scanner := bufio.NewScanner(file)
 	var games []Game
