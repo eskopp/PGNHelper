@@ -1,6 +1,7 @@
 # PGN Helper
 
 [![Windows](https://github.com/eskopp/PGNHelper/actions/workflows/windows.yml/badge.svg)](https://github.com/eskopp/PGNHelper/actions/workflows/windows.yml) [![Linux](https://github.com/eskopp/PGNHelper/actions/workflows/linux.yml/badge.svg)](https://github.com/eskopp/PGNHelper/actions/workflows/linux.yml) [![Mac](https://github.com/eskopp/PGNHelper/actions/workflows/Mac.yml/badge.svg)](https://github.com/eskopp/PGNHelper/actions/workflows/Mac.yml)
+[![wakatime](https://wakatime.com/badge/user/018d28f6-efdf-4097-b633-b84af841166c/project/018d3b8e-3298-4faa-87c7-b494ad230448.svg)](https://wakatime.com/badge/user/018d28f6-efdf-4097-b633-b84af841166c/project/018d3b8e-3298-4faa-87c7-b494ad230448)
 
 ## Build
 
@@ -58,16 +59,13 @@ The flag accepts both pgn and json files.  The basic problem is that the EventDa
 > [!NOTE]  
 > The function is not yet included in the current release.
 
+> [!TIP]  
+> New Syntax.
+
 The flag creates or deletes pgn or json files.
-- Create / Delete a PGN file
 ```bash
-pgn -createpgn test.pgn
-pgn -deletepgn test.pgn
-```
-- Create / Delete a JSON file
-```bash
-pgn -createjson test.json
-pgn -deletejson test.json
+pgn -create dummy.pgn 
+pgn -delete dummy.pgn 
 ```
 
 

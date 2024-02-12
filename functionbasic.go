@@ -1,133 +1,78 @@
 package main
 
 import (
+	"fmt"
 	"github.com/fatih/color"
 	"os"
 	"strings"
 )
 
-// PGN Block
-func createpgn() {
-	// Create a PGN File
-	var inputfile string
-
-	// Prüfe, ob zu viele oder wenige Args gesetzt sind
+func createfile() {
+	// Prüfe die Anzahl der übergebenen Argumente
 	if len(os.Args) != 3 {
-		color.Red("Error counting args")
+		color.Red("Error: Incorrect number of arguments")
 		os.Exit(1)
 	}
 
-	// Checke Input
-	inputfile = os.Args[2]
+	// Extrahiere den Dateinamen aus den Argumenten
+	inputfile := os.Args[2]
 
-	// Check FileType
-	if strings.HasSuffix(strings.ToLower(inputfile), ".pgn") {
-		inputfile = inputfile + ""
-	} else if !strings.ContainsRune(inputfile, '.') {
-		inputfile = inputfile + ".pgn"
-	} else {
-		color.Red("Falsches Datei Format")
+	// Überprüfe, ob die Datei bereits existiert
+	if _, err := os.Stat(inputfile); err == nil {
+		color.Red(inputfile + " already exists")
 		os.Exit(1)
 	}
 
-	// Magic
-	var _, err = os.Create(inputfile)
+	// Überprüfe, ob die Dateiendung eine von ".pgn" oder ".json" ist
+	if !strings.HasSuffix(inputfile, ".pgn") && !strings.HasSuffix(inputfile, ".json") {
+		color.Red("Error: File extension must be '.pgn' or '.json'")
+		os.Exit(1)
+	}
+
+	// Erstelle die Datei
+	file, err := os.Create(inputfile)
 	if err != nil {
-		color.Red("Can't create file")
+		fmt.Println("Error creating file:", err)
 		os.Exit(1)
 	}
+	defer func() {
+		if err := file.Close(); err != nil {
+			fmt.Println("Error closing file:", err)
+		}
+	}()
+
+	fmt.Println(inputfile, "created successfully")
+	os.Exit(0)
 }
 
-func deletepgn() {
-	// Create a PGN File
-	var inputfile string
-
-	// Prüfe, ob zu viele oder wenige Args gesetzt sind
+func deletefile() {
+	// Prüfe die Anzahl der übergebenen Argumente
 	if len(os.Args) != 3 {
-		color.Red("Error counting args")
+		color.Red("Error: Incorrect number of arguments")
 		os.Exit(1)
 	}
 
-	// Checke Input
-	inputfile = os.Args[2]
+	// Extrahiere den Dateinamen aus den Argumenten
+	inputfile := os.Args[2]
 
-	// Check FileType
-	if strings.HasSuffix(strings.ToLower(inputfile), ".pgn") {
-		inputfile = inputfile + ""
-	} else if !strings.ContainsRune(inputfile, '.') {
-		inputfile = inputfile + ".pgn"
-	} else {
-		color.Red("Falsches Datei Format")
+	// Überprüfe, ob die Datei existiert
+	if _, err := os.Stat(inputfile); os.IsNotExist(err) {
+		color.Red(inputfile + " does not exist")
 		os.Exit(1)
 	}
 
-	// Magic
-	var err = os.Remove(inputfile)
+	// Überprüfe, ob die Dateiendung ".pgn" oder ".json" ist
+	if !strings.HasSuffix(inputfile, ".pgn") && !strings.HasSuffix(inputfile, ".json") {
+		color.Red("Error: File extension must be '.pgn' or '.json'")
+		os.Exit(1)
+	}
+
+	// Lösche die Datei
+	err := os.Remove(inputfile)
 	if err != nil {
-		color.Red("Can't create file")
-		os.Exit(1)
-	}
-}
-
-// JSON Block
-func createjson() {
-	// Create a PGN File
-	var inputfile string
-
-	// Prüfe, ob zu viele oder wenige Args gesetzt sind
-	if len(os.Args) != 3 {
-		color.Red("Error counting args")
+		fmt.Println("Error deleting file:", err)
 		os.Exit(1)
 	}
 
-	// Checke Input
-	inputfile = os.Args[2]
-
-	// Check FileType
-	if strings.HasSuffix(strings.ToLower(inputfile), ".json") {
-		inputfile = inputfile + ""
-	} else if !strings.ContainsRune(inputfile, '.') {
-		inputfile = inputfile + ".json"
-	} else {
-		color.Red("Falsches Datei Format")
-		os.Exit(1)
-	}
-
-	// Magic
-	var _, err = os.Create(inputfile)
-	if err != nil {
-		color.Red("Can't create file")
-		os.Exit(1)
-	}
-}
-
-func deletejson() {
-	// Create a PGN File
-	var inputfile string
-
-	// Prüfe, ob zu viele oder wenige Args gesetzt sind
-	if len(os.Args) != 3 {
-		color.Red("Error counting args")
-		os.Exit(1)
-	}
-
-	// Checke Input
-	inputfile = os.Args[2]
-
-	// Check FileType
-	if strings.HasSuffix(strings.ToLower(inputfile), ".json") {
-		inputfile = inputfile + ""
-	} else if !strings.ContainsRune(inputfile, '.') {
-		inputfile = inputfile + ".json"
-	} else {
-		color.Red("Falsches Datei Format")
-		os.Exit(1)
-	}
-
-	// Magic
-	var err = os.Remove(inputfile)
-	if err != nil {
-		color.Red("Can't create file")
-		os.Exit(1)
-	}
+	os.Exit(0)
 }
