@@ -7,6 +7,7 @@ import (
 
 func checkForUnknownFlags() {
 
+	// Flag Map
 	knownFlags := map[string]bool{
 		"-help":       true,
 		"-parsePGN":   true,
