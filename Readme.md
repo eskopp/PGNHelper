@@ -69,5 +69,3 @@ pgn -createpgn test.pgn
 pgn -createjson test.json
 pgn -createjson test.json
 ```
-
-The flag accepts both pgn and json files.  The basic problem is that the EventDate attribute overwrites the other Date attribute. As a result, the wrong date is displayed in PGN files.
