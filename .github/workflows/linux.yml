@@ -54,3 +54,58 @@ jobs:
       - name: Clean
         run: |
           git clean -fX
+
+  buildtests:
+    name: Buildtests
+    needs: [test, build]
+    strategy:
+      matrix:
+        go-version: ['1.22.0', '1.21.5', '1.21.0']
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: ${{ matrix.go-version }}
+
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Build pgn
+        run: |
+          go build -o pgn
+
+      - name: Switch folder
+        run: |
+          cp pgn ./test
+          cd test
+
+      - name: Parse PGN to JSON with no JSON flag
+        run: |
+          rm *.json
+          pgn -parsePGN parse.pgn
+          cat parse.json
+          rm *.json
+
+      - name: Parse PGN to JSON with JSON Flag
+        run: |
+          rm *.json
+          pgn -parsePGN parse.pgn test.json
+          cat test.json
+
+      - name: Parse JSON to PGN with no PGN flag
+        run: |
+          rm *.pgn
+          pgn -parseJSON test.json
+          cat test.pgn
+
+      - name: Parse JSON to PGN with no PGN flag
+        run: |
+          rm *.pgn
+          pgn -parseJSON test.json dummy.pgn
+          cat dummy.pgn
+
+      - name: Clean
+        run: |
+          git clean -fX

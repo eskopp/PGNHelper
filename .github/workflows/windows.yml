@@ -1,4 +1,4 @@
-name: Windows
+name: Linux
 
 on:
   push:
@@ -26,11 +26,10 @@ jobs:
         uses: actions/checkout@v4
 
       - name: List directory content
-        run: dir
+        run: ls
 
       - name: Test
         run: go test ./... -v
-        shell: pwsh
 
   build:
     name: Build
@@ -50,10 +49,63 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Build
-        run: go build -o PGNHelper.exe
-        shell: pwsh
+        run: go build -o PGNHelper
 
       - name: Clean
         run: |
           git clean -fX
-        shell: pwsh
+
+  buildtests:
+    name: Buildtests
+    needs: [test, build]
+    strategy:
+      matrix:
+        go-version: ['1.22.0', '1.21.5', '1.21.0']
+    runs-on: windows-latest
+
+    steps:
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: ${{ matrix.go-version }}
+
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Build pgn
+        run: |
+          go build -o pgn
+
+      - name: Switch folder
+        run: |
+          cp pgn ./test
+          cd test
+
+      - name: Parse PGN to JSON with no JSON flag
+        run: |
+          powershell del *.json
+          pgn -parsePGN parse.pgn
+          type parse.json
+          powershell del *.json
+
+      - name: Parse PGN to JSON with JSON Flag
+        run: |
+          powershell rm *.json
+          pgn -parsePGN parse.pgn test.json
+          type test.json
+
+      - name: Parse JSON to PGN with no PGN flag
+        run: |
+          powershell del *.pgn
+          pgn -parseJSON test.json
+          type test.pgn
+
+      - name: Parse JSON to PGN with no PGN flag
+        run: |
+          powershell del *.pgn
+          pgn -parseJSON test.json dummy.pgn
+          type dummy.pgn
+
+      - name: Clean
+        run: |
+          git clean -fX
