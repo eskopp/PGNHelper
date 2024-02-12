@@ -40,7 +40,6 @@ func eventdate() {
 	if strings.HasSuffix(strings.ToLower(inputfile), ".json") {
 		filetype = "json"
 	}
-	fmt.Println(filetype)
 
 	// Prüfe ob die Datei existiert
 	if _, err := os.Stat(inputfile); os.IsNotExist(err) {
@@ -48,8 +47,23 @@ func eventdate() {
 		os.Exit(1)
 	}
 
+	color.Yellow("input:" + inputfile)
+	color.Yellow("filetype:" + filetype)
+	color.Yellow("UUIDFile:" + uuidfile)
+
 	// Wandelt die PGN temporär in eine JSON um
-	if filetype == "json" {
+	if filetype == "pgn" {
+		file, err := os.Create(uuidfile + ".json")
+		if err != nil {
+			fmt.Println("Fehler beim Erstellen der Datei:", err)
+			return
+		}
+		defer func(file *os.File) {
+			err := file.Close()
+			if err != nil {
+
+			}
+		}(file)
 		if err := parsePGNFile(inputfile, uuidfile+".json"); err != nil {
 			panic(err)
 		}
