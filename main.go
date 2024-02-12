@@ -15,7 +15,7 @@ func main() {
 	// Flags für das Parsen einer PGN-Datei und einer JSON-Datei
 	parsePGNFlag := flag.Bool("parsePGN", false, "Verarbeitet eine PGN-Datei.")
 	parseJSONFlag := flag.String("parseJSON", "", "Pfad zur JSON-Datei, die geparst werden soll.")
-	parseEventDateFlag := flag.String("parseEventDate", "", "Pfad zur JSON-Datei, aus der das Event-Datum entfernt werden soll.")
+	parseEventDateFlag := flag.String("EventDate", "", "Pfad zur JSON-Datei, aus der das Event-Datum entfernt werden soll.")
 
 	// Eigene Hilfe-Funktion einrichten
 	flag.Usage = pgnHelp
