@@ -11,7 +11,7 @@ func checkForUnknownFlags() {
 		"-help":      true,
 		"-parsePGN":  true,
 		"-parseJSON": true,
-		"-eventDate": true,
+		"-EventDate": true,
 	}
 
 	for _, arg := range os.Args[1:] {
