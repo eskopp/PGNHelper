@@ -9,7 +9,7 @@ func checkForUnknownFlags() {
 
 	// Flag Map
 	knownFlags := map[string]bool{
-		"-help":       true,
+   	"-help":       true,
 		"-parsePGN":   true,
 		"-parseJSON":  true,
 		"-EventDate":  true,
@@ -18,6 +18,7 @@ func checkForUnknownFlags() {
 		"-createjson": true,
 		"-deletejson": true,
 		"-removecb":   true,
+
 	}
 
 	for _, arg := range os.Args[1:] {
