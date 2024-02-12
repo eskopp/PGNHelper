@@ -60,4 +60,4 @@ or
 ```bash
 pgn -EventDate test.json
 ```
-
+The flag accepts both pgn and json files. 
