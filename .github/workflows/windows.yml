@@ -109,6 +109,19 @@ jobs:
           .\pgn.exe -parseJSON games.json dummy.pgn
           ls
           type dummy.pgn
+      - name: Remove Event Date in PGN
+        working-directory: test
+        run: |
+          pgn -EventDate parse.pgn
+          ls -aril          
+          type parse.pgn
+
+      - name: Remove Event Date in JSON
+        working-directory: test
+        run: |
+          pgn -EventDate test.json
+          ls           
+          type test.json 
 
       - name: Clean
         run: |

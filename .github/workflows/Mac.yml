@@ -112,6 +112,20 @@ jobs:
           ls -aril          
           cat dummy.pgn
 
+      - name: Remove Event Date in PGN
+        working-directory: test
+        run: |
+          pgn -EventDate parse.pgn
+          ls -aril          
+          cat parse.pgn
+
+      - name: Remove Event Date in JSON
+        working-directory: test
+        run: |
+          pgn -EventDate test.json
+          ls -aril          
+          cat test.json 
+
       - name: Clean
         run: |
           git clean -fX
