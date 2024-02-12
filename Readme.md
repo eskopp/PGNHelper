@@ -39,3 +39,12 @@ pgn -parsePGN test.pgn output.json
 If no output json is specified, the name of the PGN is adopted. 
 
 
+
+### Parse JSON
+The ``-parseJSON`` flag creates a PGN file from the JSON file. JSON files cannot be read by normal chess programs but are much less error-prone and more efficient to process and store. PGN and JSON files can be converted into each other at any time.
+```bash
+pgn -parseJSON test.json output.pgn
+```
+If no output pgn is specified, the name of the json is adopted. 
+
+
