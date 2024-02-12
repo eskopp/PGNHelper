@@ -113,7 +113,7 @@ jobs:
         working-directory: test
         run: |
           .\pgn.exe -EventDate parse.pgn
-          ls -aril          
+          ls    
           type parse.pgn
 
       - name: Remove Event Date in JSON
