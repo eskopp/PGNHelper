@@ -57,4 +57,4 @@ The function removes the Event Date attribute from the PGN files. The attribute 
 pgn -EventDate test.pgn
 pgn -EventDate test.json
 ```
-The flag accepts both pgn and json files. 
+The flag accepts both pgn and json files.  The basic problem is that the EventDate attribute overwrites the other Date attribute. As a result, the wrong date is displayed in PGN files.
