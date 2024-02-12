@@ -20,7 +20,7 @@ func main() {
 	deletepgnFlag := flag.String("deletepgn", "", "Pfad zur PGN Datei die entfernt werden soll.")
 	createjsonFlag := flag.String("createjson", "", "Pfad zur JSON Datei die erstellt werden soll.")
 	deletejsonFlag := flag.String("deletejson", "", "Pfad zur JSON Datei die entfernt werden soll.")
-	removecbfilesFlag := flag.String("removecbfiles", "", "Entfernt altlasten von Chessbase.")
+	removecbfilesFlag := flag.String("removecb", "", "Entfernt altlasten von Chessbase.")
 
 	// Eigene Hilfe-Funktion einrichten
 	flag.Usage = pgnHelp
@@ -36,7 +36,7 @@ func main() {
 
 	// Remove Chessbase Files Flag
 	if *removecbfilesFlag != "" {
-		removecbfiles()
+		removecb()
 		return
 	}
 
