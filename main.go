@@ -16,6 +16,10 @@ func main() {
 	parsePGNFlag := flag.Bool("parsePGN", false, "Verarbeitet eine PGN-Datei.")
 	parseJSONFlag := flag.String("parseJSON", "", "Pfad zur JSON-Datei, die geparst werden soll.")
 	parseEventDateFlag := flag.String("EventDate", "", "Pfad zur JSON-Datei, aus der das Event-Datum entfernt werden soll.")
+	createpgnFlag := flag.String("createpgn", "", "Pfad zur PGN Datei die erstellt werden soll")
+	deletepgnFlag := flag.String("deletepgn", "", "Pfad zur PGN Datei die entfernt werden soll.")
+	createjsonFlag := flag.String("createjson", "", "Pfad zur JSON Datei die erstellt werden soll.")
+	deletejsonFlag := flag.String("deletejson", "", "Pfad zur JSON Datei die entfernt werden soll.")
 
 	// Eigene Hilfe-Funktion einrichten
 	flag.Usage = pgnHelp
@@ -26,6 +30,30 @@ func main() {
 	// Help Flag
 	if *helpFlag {
 		pgnHelp()
+		return
+	}
+
+	// Create JSON Flag
+	if *createjsonFlag != "" {
+		createjson()
+		return
+	}
+
+	// Delete JSON Flag
+	if *deletejsonFlag != "" {
+		deletejson()
+		return
+	}
+
+	// Create PGN Flag
+	if *createpgnFlag != "" {
+		createpgn()
+		return
+	}
+
+	// Delete PGN Flag
+	if *deletepgnFlag != "" {
+		deletepgn()
 		return
 	}
 

@@ -52,3 +52,20 @@ pgn -EventDate test.pgn
 pgn -EventDate test.json
 ```
 The flag accepts both pgn and json files.  The basic problem is that the EventDate attribute overwrites the other Date attribute. As a result, the wrong date is displayed in PGN files.
+
+
+### Create / Delete PGN or JSON file
+> [!NOTE]  
+> The function is not yet included in the current release.
+
+The flag creates or deletes pgn or json files.
+- Create / Delete a PGN file
+```bash
+pgn -createpgn test.pgn
+pgn -createpgn test.pgn
+```
+- Create / Delete a JSON file
+```bash
+pgn -createjson test.json
+pgn -createjson test.json
+```
