@@ -56,11 +56,6 @@ The flag accepts both pgn and json files.  The basic problem is that the EventDa
 
 
 ### Create / Delete PGN or JSON file
-> [!NOTE]  
-> The function is not yet included in the current release.
-
-> [!TIP]  
-> New Syntax.
 
 The flag creates or deletes pgn or json files.
 ```bash
@@ -71,9 +66,6 @@ pgn -delete dummy.pgn
 
 ### Remove Chessbase Files
 > [!NOTE]  
-> The function is not yet included in the current release.
-
-> [!TIP]  
 > Chessbase does not need these files, if you open the PGN file again Chessbase will create the files again. You can only delete the files if you have closed Chessbase.
 
 The flag deletes all pgi and ini files of Chessbase from the folder. This leaves the PGN files. Chessbase archives and CBH archives remain unaffected.
