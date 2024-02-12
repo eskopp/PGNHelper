@@ -81,6 +81,11 @@ jobs:
           cp pgn.exe ./test/pgn.exe
           cd test
 
+      - name: Location and System
+        run: |
+          ls 
+          pwd
+
       - name: Parse PGN to JSON with no JSON flag
         run: |
           .\pgn.exe -parsePGN parse.pgn
