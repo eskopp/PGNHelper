@@ -1,13 +1,13 @@
 package main
 
 import (
+	"fmt"
 	"github.com/fatih/color"
 	"os"
 	"strings"
 )
 
-// PGN Block
-func createpgn() {
+func createfile() {
 	// Create a PGN File
 	var inputfile string
 
@@ -20,25 +20,26 @@ func createpgn() {
 	// Checke Input
 	inputfile = os.Args[2]
 
-	// Check FileType
-	if strings.HasSuffix(strings.ToLower(inputfile), ".pgn") {
-		inputfile = inputfile + ""
-	} else if !strings.ContainsRune(inputfile, '.') {
-		inputfile = inputfile + ".pgn"
-	} else {
-		color.Red("Falsches Datei Format")
+	// Prüfe ob die Datei existiert
+	if _, err := os.Stat(inputfile); os.IsExist(err) {
+		color.Red(inputfile + " exist")
 		os.Exit(1)
 	}
 
 	// Magic
-	var _, err = os.Create(inputfile)
-	if err != nil {
-		color.Red("Can't create file")
-		os.Exit(1)
+	if _, err := os.Stat(inputfile); err == nil {
+		if strings.HasSuffix(inputfile, ".json") || strings.HasSuffix(inputfile, ".pgn") {
+			_, err := os.Create(inputfile)
+			if err != nil {
+				return
+			}
+		} else {
+			fmt.Println("Fehler beim Überprüfen von", inputfile+":", err)
+		}
 	}
 }
 
-func deletepgn() {
+func deletefile() {
 	// Create a PGN File
 	var inputfile string
 
@@ -51,83 +52,21 @@ func deletepgn() {
 	// Checke Input
 	inputfile = os.Args[2]
 
-	// Check FileType
-	if strings.HasSuffix(strings.ToLower(inputfile), ".pgn") {
-		inputfile = inputfile + ""
-	} else if !strings.ContainsRune(inputfile, '.') {
-		inputfile = inputfile + ".pgn"
-	} else {
-		color.Red("Falsches Datei Format")
+	// Prüfe ob die Datei existiert
+	if _, err := os.Stat(inputfile); os.IsNotExist(err) {
+		color.Red(inputfile + " File dosent exist")
 		os.Exit(1)
 	}
 
 	// Magic
-	var err = os.Remove(inputfile)
-	if err != nil {
-		color.Red("Can't create file")
-		os.Exit(1)
-	}
-}
-
-// JSON Block
-func createjson() {
-	// Create a PGN File
-	var inputfile string
-
-	// Prüfe, ob zu viele oder wenige Args gesetzt sind
-	if len(os.Args) != 3 {
-		color.Red("Error counting args")
-		os.Exit(1)
-	}
-
-	// Checke Input
-	inputfile = os.Args[2]
-
-	// Check FileType
-	if strings.HasSuffix(strings.ToLower(inputfile), ".json") {
-		inputfile = inputfile + ""
-	} else if !strings.ContainsRune(inputfile, '.') {
-		inputfile = inputfile + ".json"
-	} else {
-		color.Red("Falsches Datei Format")
-		os.Exit(1)
-	}
-
-	// Magic
-	var _, err = os.Create(inputfile)
-	if err != nil {
-		color.Red("Can't create file")
-		os.Exit(1)
-	}
-}
-
-func deletejson() {
-	// Create a PGN File
-	var inputfile string
-
-	// Prüfe, ob zu viele oder wenige Args gesetzt sind
-	if len(os.Args) != 3 {
-		color.Red("Error counting args")
-		os.Exit(1)
-	}
-
-	// Checke Input
-	inputfile = os.Args[2]
-
-	// Check FileType
-	if strings.HasSuffix(strings.ToLower(inputfile), ".json") {
-		inputfile = inputfile + ""
-	} else if !strings.ContainsRune(inputfile, '.') {
-		inputfile = inputfile + ".json"
-	} else {
-		color.Red("Falsches Datei Format")
-		os.Exit(1)
-	}
-
-	// Magic
-	var err = os.Remove(inputfile)
-	if err != nil {
-		color.Red("Can't create file")
-		os.Exit(1)
+	if _, err := os.Stat(inputfile); err == nil {
+		if strings.HasSuffix(inputfile, ".json") || strings.HasSuffix(inputfile, ".pgn") {
+			err := os.Remove(inputfile)
+			if err != nil {
+				return
+			}
+		} else {
+			fmt.Println("Fehler beim Überprüfen von", inputfile+":", err)
+		}
 	}
 }

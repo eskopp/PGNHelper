@@ -16,10 +16,8 @@ func main() {
 	parsePGNFlag := flag.Bool("parsePGN", false, "Verarbeitet eine PGN-Datei.")
 	parseJSONFlag := flag.String("parseJSON", "", "Pfad zur JSON-Datei, die geparst werden soll.")
 	parseEventDateFlag := flag.String("EventDate", "", "Pfad zur JSON-Datei, aus der das Event-Datum entfernt werden soll.")
-	createpgnFlag := flag.String("createpgn", "", "Pfad zur PGN Datei die erstellt werden soll")
-	deletepgnFlag := flag.String("deletepgn", "", "Pfad zur PGN Datei die entfernt werden soll.")
-	createjsonFlag := flag.String("createjson", "", "Pfad zur JSON Datei die erstellt werden soll.")
-	deletejsonFlag := flag.String("deletejson", "", "Pfad zur JSON Datei die entfernt werden soll.")
+	createFlag := flag.String("createfile", "", "Pfad zur Datei die erstellt werden soll")
+	deleteFlag := flag.String("deletefile", "", "Pfad zur  Datei die entfernt werden soll.")
 	removecbfilesFlag := flag.String("removecb", "", "Entfernt altlasten von Chessbase.")
 
 	// Eigene Hilfe-Funktion einrichten
@@ -40,27 +38,15 @@ func main() {
 		return
 	}
 
-	// Create JSON Flag
-	if *createjsonFlag != "" {
-		createjson()
+	// Create Flag
+	if *createFlag != "" {
+		createfile()
 		return
 	}
 
-	// Delete JSON Flag
-	if *deletejsonFlag != "" {
-		deletejson()
-		return
-	}
-
-	// Create PGN Flag
-	if *createpgnFlag != "" {
-		createpgn()
-		return
-	}
-
-	// Delete PGN Flag
-	if *deletepgnFlag != "" {
-		deletepgn()
+	// Delete Flag
+	if *deleteFlag != "" {
+		deletefile()
 		return
 	}
 

@@ -58,14 +58,17 @@ The flag accepts both pgn and json files.  The basic problem is that the EventDa
 > [!NOTE]  
 > The function is not yet included in the current release.
 
+> [!TIP]  
+> New Syntax.
+
 The flag creates or deletes pgn or json files.
 - Create / Delete a PGN file
 ```bash
-pgn -createpgn test.pgn
-pgn -deletepgn test.pgn
+pgn -createfile test.pgn
+pgn -deletefile test.pgn
 ```
 - Create / Delete a JSON file
 ```bash
-pgn -createjson test.json
-pgn -deletejson test.json
+pgn -createfile test.json
+pgn -deletefile test.json
 ```
