@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/fatih/color"
-	"io/ioutil"
 	"os"
 	"strings"
 )
@@ -70,7 +69,7 @@ func eventdate() {
 	}
 
 	// Inhalt der JSON-Datei lesen
-	var inputBytes, err = ioutil.ReadFile(uuidfile + ".json")
+	inputBytes, err := os.ReadFile(uuidfile + ".json")
 	if err != nil {
 		color.Red("Fehler beim Lesen der JSON-Datei:", err)
 		os.Exit(1)
@@ -96,7 +95,7 @@ func eventdate() {
 	}
 
 	// Inhalt in die Ausgabedatei schreiben
-	if err := ioutil.WriteFile(inputfile, outputBytes, 0644); err != nil {
+	if err := os.WriteFile(inputfile, outputBytes, 0644); err != nil {
 		color.Red("Fehler beim Schreiben der JSON-Datei:", err)
 		os.Exit(1)
 	}
@@ -106,11 +105,12 @@ func eventdate() {
 	// Wenn die ursprungsdatei eine PGN Datei war, lösche die ursprüngliche Datei
 	// und wandel es wieder als PGN um
 	if filetype == "pgn" {
-		err := os.Remove(inputfile)
-		if err != nil {
-			color.Red("Can't delete file:", err)
-			return
-		}
+		/*
+			err := os.Remove(inputfile)
+			if err != nil {
+				color.Red("Can't delete file:", err)
+				return
+			} */
 		if err := parseJSONFile(uuidfile+".json", inputfile); err != nil {
 			panic(err)
 		}
