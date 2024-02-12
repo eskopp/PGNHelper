@@ -27,7 +27,7 @@ func parsejson() {
 	if len(os.Args) == 4 {
 		outpgn = os.Args[3]
 	} else {
-		outpgn = inputjson[:len(inputjson)-3] + "json"
+		outpgn = inputjson[:len(inputjson)-4] + "json"
 	}
 
 	// Prüft ob input json ist
