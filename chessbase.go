@@ -6,7 +6,7 @@ import (
 	"path/filepath"
 )
 
-func removecbfiles() {
+func removecb() {
 	// Remove all pgi and ini files
 	directory := "."
 
