@@ -48,3 +48,16 @@ pgn -parseJSON test.json output.pgn
 If no output pgn is specified, the name of the json is adopted. 
 
 
+### Delete Event Date
+> [!CAUTION]  
+> The flag is not yet working. Errors occur when reading the input file. This function is not available in the current release.
+
+The function removes the Event Date attribute from the PGN files. The attribute generates errors in ChessBase and ChessX for files that are connected to DGT boards and the Lichess API.
+```bash
+pgn -EventDate test.pgn
+```
+or
+```bash
+pgn -EventDate test.json
+```
+
