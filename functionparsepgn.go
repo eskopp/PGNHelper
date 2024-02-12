@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"github.com/fatih/color"
 	"os"
 	"strings"
@@ -11,7 +10,6 @@ func parsepgn() {
 	var inputpgn string
 	var outjson string
 
-	fmt.Println("Parsing PGN-Datei:")
 	if len(os.Args) < 3 {
 		color.Red("No Args")
 		os.Exit(1)
@@ -20,14 +18,13 @@ func parsepgn() {
 	}
 
 	// Prüft, ob die Inputdatei vorhanden ist
-	fmt.Println(inputpgn)
 	if _, err := os.Stat(inputpgn); os.IsNotExist(err) {
 		color.Red(inputpgn + " File not exist")
 		os.Exit(1)
 	}
 
 	// no json name
-	if len(os.Args) < 4 {
+	if len(os.Args) == 4 {
 		outjson = os.Args[3]
 	} else {
 		outjson = inputpgn[:len(inputpgn)-3] + "json"
