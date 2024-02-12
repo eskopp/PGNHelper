@@ -62,10 +62,10 @@ The flag creates or deletes pgn or json files.
 - Create / Delete a PGN file
 ```bash
 pgn -createpgn test.pgn
-pgn -createpgn test.pgn
+pgn -deletepgn test.pgn
 ```
 - Create / Delete a JSON file
 ```bash
 pgn -createjson test.json
-pgn -createjson test.json
+pgn -deletejson test.json
 ```
