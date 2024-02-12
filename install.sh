@@ -1,4 +1,4 @@
-git checkout main
+# git checkout main (Debug)
 git pull
 go mod tidy
 go test -v
