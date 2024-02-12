@@ -63,11 +63,7 @@ The flag accepts both pgn and json files.  The basic problem is that the EventDa
 > New Syntax.
 
 The flag creates or deletes pgn or json files.
-- Create / Delete a PGN file
 ```bash
 pgn -create dummy.pgn 
-```
-or 
-```bash
 pgn -delete dummy.pgn 
 ```
