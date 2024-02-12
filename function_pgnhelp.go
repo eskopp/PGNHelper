@@ -14,11 +14,3 @@ func pgnHelp() {
 	fmt.Println("  -parseJSON \"datei.json\": Echo einer Nachricht (Platzhalter für JSON-Parsing-Logik).")
 	os.Exit(0)
 }
-
-func noflag() {
-	color.Red("try pgn -help ?")
-}
-
-func unknownflag() {
-	color.Red("Unbekannte Flag: %s\n")
-}
