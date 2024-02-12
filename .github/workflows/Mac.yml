@@ -81,29 +81,33 @@ jobs:
           cp pgn ./test/pgn
           sudo mv pgn /usr/local/bin/pgn
           bash
-          cd test
 
       - name: Location and System
+        working-directory: test
         run: |
           ls -aril 
           pwd
 
       - name: Parse PGN to JSON with no JSON flag
+        working-directory: test
         run: |
           pgn -parsePGN parse.pgn
           cat parse.json
 
       - name: Parse PGN to JSON with JSON Flag
+        working-directory: test
         run: |
           pgn -parsePGN parse.pgn test.json
           cat test.json
 
       - name: Parse JSON to PGN with no PGN flag
+        working-directory: test
         run: |
           pgn -parseJSON test.json
           cat test.pgn
 
       - name: Parse JSON to PGN with no PGN flag
+        working-directory: test
         run: |
           pgn -parseJSON test.json dummy.pgn
           cat dummy.pgn
