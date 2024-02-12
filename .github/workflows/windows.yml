@@ -112,14 +112,14 @@ jobs:
       - name: Remove Event Date in PGN
         working-directory: test
         run: |
-          pgn -EventDate parse.pgn
+          .\pgn.exe -EventDate parse.pgn
           ls -aril          
           type parse.pgn
 
       - name: Remove Event Date in JSON
         working-directory: test
         run: |
-          pgn -EventDate test.json
+          .\pgn.exe -EventDate test.json
           ls           
           type test.json 
 
