@@ -26,15 +26,18 @@ func createfile() {
 		os.Exit(1)
 	}
 
-	// Magic
+	// Check File
+	fmt.Println(inputfile)
+
+	// Test File
 	if _, err := os.Stat(inputfile); err == nil {
+		// Überprüfen, ob die Dateiendung ".json" oder ".pgn" ist
 		if strings.HasSuffix(inputfile, ".json") || strings.HasSuffix(inputfile, ".pgn") {
+			fmt.Println(inputfile, "ist entweder eine JSON- oder eine PGN-Datei.")
 			_, err := os.Create(inputfile)
 			if err != nil {
 				return
 			}
-		} else {
-			fmt.Println("Fehler beim Überprüfen von", inputfile+":", err)
 		}
 	}
 }

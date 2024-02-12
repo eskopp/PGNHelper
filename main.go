@@ -16,8 +16,8 @@ func main() {
 	parsePGNFlag := flag.Bool("parsePGN", false, "Verarbeitet eine PGN-Datei.")
 	parseJSONFlag := flag.String("parseJSON", "", "Pfad zur JSON-Datei, die geparst werden soll.")
 	parseEventDateFlag := flag.String("EventDate", "", "Pfad zur JSON-Datei, aus der das Event-Datum entfernt werden soll.")
-	createFlag := flag.String("createfile", "", "Pfad zur Datei die erstellt werden soll")
-	deleteFlag := flag.String("deletefile", "", "Pfad zur  Datei die entfernt werden soll.")
+	createFlag := flag.String("create", "", "Pfad zur Datei die erstellt werden soll")
+	deleteFlag := flag.String("delete", "", "Pfad zur  Datei die entfernt werden soll.")
 	removecbfilesFlag := flag.String("removecb", "", "Entfernt altlasten von Chessbase.")
 
 	// Eigene Hilfe-Funktion einrichten
