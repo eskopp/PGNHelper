@@ -104,13 +104,13 @@ jobs:
       - name: Parse JSON to PGN with no PGN flag
         working-directory: test
         run: |
-          pgn -parseJSON test.json
-          cat test.pgn
+          pgn -parseJSON games.json
+          cat games.pgn
 
       - name: Parse JSON to PGN with no PGN flag
         working-directory: test
         run: |
-          pgn -parseJSON test.json dummy.pgn
+          pgn -parseJSON games.json dummy.pgn
           cat dummy.pgn
 
       - name: Clean

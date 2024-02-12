@@ -101,13 +101,13 @@ jobs:
       - name: Parse JSON to PGN with no PGN flag
         working-directory: test
         run: |
-          .\pgn.exe -parseJSON test.json
-          type test.pgn
+          .\pgn.exe -parseJSON games.json
+          type games.pgn
 
       - name: Parse JSON to PGN with no PGN flag
         working-directory: test
         run: |
-          .\pgn.exe -parseJSON test.json dummy.pgn
+          .\pgn.exe -parseJSON games.json dummy.pgn
           type dummy.pgn
 
       - name: Clean
