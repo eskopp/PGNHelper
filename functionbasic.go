@@ -23,28 +23,25 @@ func createfile() {
 		os.Exit(1)
 	}
 
-	// Erstelle die Datei entsprechend der Dateiendung
-	var filename string
-	if strings.HasSuffix(inputfile, ".pgn") || strings.HasSuffix(inputfile, ".json") {
-		filename = inputfile
-	} else {
-		filename = inputfile + ".pgn"
+	// Überprüfe, ob die Dateiendung eine von ".pgn" oder ".json" ist
+	if !strings.HasSuffix(inputfile, ".pgn") && !strings.HasSuffix(inputfile, ".json") {
+		color.Red("Error: File extension must be '.pgn' or '.json'")
+		os.Exit(1)
 	}
 
 	// Erstelle die Datei
-	file, err := os.Create(filename)
+	file, err := os.Create(inputfile)
 	if err != nil {
 		fmt.Println("Error creating file:", err)
 		os.Exit(1)
 	}
-	defer func(file *os.File) {
-		err := file.Close()
-		if err != nil {
-
+	defer func() {
+		if err := file.Close(); err != nil {
+			fmt.Println("Error closing file:", err)
 		}
-	}(file)
+	}()
 
-	fmt.Println(filename, "created successfully")
+	fmt.Println(inputfile, "created successfully")
 	os.Exit(0)
 }
 
@@ -58,33 +55,24 @@ func deletefile() {
 	// Extrahiere den Dateinamen aus den Argumenten
 	inputfile := os.Args[2]
 
-	// Überprüfe, ob die Datei bereits existiert
-	if _, err := os.Stat(inputfile); err == nil {
-		color.Red(inputfile + " already exists")
+	// Überprüfe, ob die Datei existiert
+	if _, err := os.Stat(inputfile); os.IsNotExist(err) {
+		color.Red(inputfile + " does not exist")
 		os.Exit(1)
 	}
 
-	// Erstelle die Datei entsprechend der Dateiendung
-	var filename string
-	if strings.HasSuffix(inputfile, ".pgn") || strings.HasSuffix(inputfile, ".json") {
-		filename = inputfile
-	} else {
-		filename = inputfile + ".pgn"
+	// Überprüfe, ob die Dateiendung ".pgn" oder ".json" ist
+	if !strings.HasSuffix(inputfile, ".pgn") && !strings.HasSuffix(inputfile, ".json") {
+		color.Red("Error: File extension must be '.pgn' or '.json'")
+		os.Exit(1)
 	}
 
-	// Erstelle die Datei
-	file, err := os.Create(filename)
+	// Lösche die Datei
+	err := os.Remove(inputfile)
 	if err != nil {
-		fmt.Println("Error creating file:", err)
+		fmt.Println("Error deleting file:", err)
 		os.Exit(1)
 	}
-	defer func(file *os.File) {
-		err := file.Close()
-		if err != nil {
 
-		}
-	}(file)
-
-	fmt.Println(filename, "created successfully")
 	os.Exit(0)
 }
