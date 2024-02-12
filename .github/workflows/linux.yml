@@ -78,7 +78,9 @@ jobs:
 
       - name: Switch folder
         run: |
-          cp pgn ./test
+          cp pgn ./test/pgn
+          sudo mv pgn /usr/local/bin/pgn
+          bash
           cd test
 
       - name: Parse PGN to JSON with no JSON flag

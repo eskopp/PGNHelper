@@ -74,31 +74,31 @@ jobs:
 
       - name: Build pgn
         run: |
-          go build -o pgn
+          go build -o pgn.exe
 
       - name: Switch folder
         run: |
-          cp pgn ./test
+          cp pgn.exe ./test/pgn.exe
           cd test
 
       - name: Parse PGN to JSON with no JSON flag
         run: |
-          pgn -parsePGN parse.pgn
+          .\pgn.exe -parsePGN parse.pgn
           type parse.json
 
       - name: Parse PGN to JSON with JSON Flag
         run: |
-          pgn -parsePGN parse.pgn test.json
+          .\pgn.exe -parsePGN parse.pgn test.json
           type test.json
 
       - name: Parse JSON to PGN with no PGN flag
         run: |
-          pgn -parseJSON test.json
+          .\pgn.exe -parseJSON test.json
           type test.pgn
 
       - name: Parse JSON to PGN with no PGN flag
         run: |
-          pgn -parseJSON test.json dummy.pgn
+          .\pgn.exe -parseJSON test.json dummy.pgn
           type dummy.pgn
 
       - name: Clean
