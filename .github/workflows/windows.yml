@@ -90,24 +90,28 @@ jobs:
         working-directory: test
         run: |
           .\pgn.exe -parsePGN parse.pgn
+          ls
           type parse.json
 
       - name: Parse PGN to JSON with JSON Flag
         working-directory: test
         run: |
           .\pgn.exe -parsePGN parse.pgn test.json
+          ls
           type test.json
 
       - name: Parse JSON to PGN with no PGN flag
         working-directory: test
         run: |
           .\pgn.exe -parseJSON games.json
+          ls
           type games.pgn
 
       - name: Parse JSON to PGN with no PGN flag
         working-directory: test
         run: |
           .\pgn.exe -parseJSON games.json dummy.pgn
+          ls
           type dummy.pgn
 
       - name: Clean

@@ -93,24 +93,28 @@ jobs:
         working-directory: test
         run: |
           pgn -parsePGN parse.pgn
+          ls -aril
           cat parse.json
 
       - name: Parse PGN to JSON with JSON Flag
         working-directory: test
         run: |
           pgn -parsePGN parse.pgn test.json
+          ls -aril
           cat test.json
 
       - name: Parse JSON to PGN with no PGN flag
         working-directory: test
         run: |
           pgn -parseJSON games.json
+          ls -aril
           cat games.pgn
 
       - name: Parse JSON to PGN with no PGN flag
         working-directory: test
         run: |
           pgn -parseJSON games.json dummy.pgn
+          ls -aril
           cat dummy.pgn
 
       - name: Clean
