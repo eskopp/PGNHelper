@@ -1,10 +1,9 @@
 package main
 
 import (
-	"encoding/json"
+	"bufio"
 	"fmt"
 	"github.com/fatih/color"
-	"io/ioutil"
 	"os"
 	"strings"
 )
@@ -13,11 +12,6 @@ import (
 func eventdate() {
 	// File Handler
 	var inputfile string
-	var filetype string
-	var uuidfile string
-
-	// legt uuid fest
-	uuidfile = generateUUID()
 
 	// Prüfe ob nicht zu viele Flags gesetzt sind
 	if len(os.Args) != 3 {
@@ -32,73 +26,85 @@ func eventdate() {
 		inputfile = os.Args[2]
 	}
 
-	// Teste ob die Datei PGN oder JSON ist
-	filetype = "error"
-	if strings.HasSuffix(strings.ToLower(inputfile), ".pgn") {
-		filetype = "pgn"
-	}
-	if strings.HasSuffix(strings.ToLower(inputfile), ".json") {
-		filetype = "json"
-	}
-	fmt.Println(filetype)
-
 	// Prüfe ob die Datei existiert
 	if _, err := os.Stat(inputfile); os.IsNotExist(err) {
 		color.Red(inputfile + " File not exist")
 		os.Exit(1)
 	}
 
-	// Wandelt die PGN temporär in eine JSON um
-	if filetype == "json" {
-		if err := parsePGNFile(inputfile, uuidfile+".json"); err != nil {
-			panic(err)
-		}
-	}
-
-	// Inhalt der JSON-Datei lesen
-	var inputBytes, err = ioutil.ReadFile(uuidfile + ".json")
+	err := removeEventDateLines(inputfile)
 	if err != nil {
-		color.Red("Fehler beim Lesen der JSON-Datei:", err)
-		os.Exit(1)
+		color.Red("Error:")
+		fmt.Println(err)
+		return
 	}
+}
 
-	// JSON-Daten in ein Slice von Game-Strukturen parsen
-	var games []Game
-	if err := json.Unmarshal(inputBytes, &games); err != nil {
-		color.Red("Fehler beim Parsen der JSON-Daten:", err)
-		os.Exit(1)
-	}
-
-	// Durch alle Spiele iterieren und EventDate entfernen
-	for i := range games {
-		delete(games[i].Tags, "EventDate")
-	}
-
-	// JSON-Daten mit den entfernten EventDate in die Ausgabedatei schreiben
-	outputBytes, err := json.MarshalIndent(games, "", "    ")
+func removeEventDateLines(filename string) error {
+	// Öffne die Datei zum Lesen
+	file, err := os.Open(filename)
 	if err != nil {
-		color.Red("Fehler beim Konvertieren der Daten in JSON:", err)
-		os.Exit(1)
+		return err
 	}
-
-	// Inhalt in die Ausgabedatei schreiben
-	if err := ioutil.WriteFile(inputfile, outputBytes, 0644); err != nil {
-		color.Red("Fehler beim Schreiben der JSON-Datei:", err)
-		os.Exit(1)
-	}
-
-	fmt.Println("EventDate-Einträge wurden erfolgreich aus der JSON-Datei entfernt und die modifizierten Daten wurden in die Datei", inputfile, "geschrieben.")
-
-	// Wenn die ursprungsdatei eine PGN Datei war, lösche die ursprüngliche Datei
-	// und wandel es wieder als PGN um
-	if filetype == "pgn" {
-		err := os.Remove(inputfile)
+	defer func(file *os.File) {
+		err := file.Close()
 		if err != nil {
-			color.Red("Can't delete file:", err)
-			return
+
 		}
-		if err := parseJSONFile(uuidfile+".json", inputfile); err != nil {
-			panic(err)
+	}(file)
+
+	// Erstelle einen temporären Dateinamen für die Ausgabe
+	tempFilename := filename + ".tmp"
+
+	// Öffne eine temporäre Datei zum Schreiben
+	tempFile, err := os.Create(tempFilename)
+	if err != nil {
+		return err
+	}
+	defer func(tempFile *os.File) {
+		err := tempFile.Close()
+		if err != nil {
+
+		}
+	}(tempFile)
+
+	// Lesen und Bearbeiten der Zeilen
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		line := scanner.Text()
+		if !strings.Contains(line, "EventDate") {
+			// Schreibe die Zeile in die temporäre Datei, wenn "EventDate" nicht enthalten ist
+			_, err := fmt.Fprintln(tempFile, line)
+			if err != nil {
+				return err
+			}
 		}
 	}
+
+	// Überprüfe auf Fehler beim Scannen
+	if err := scanner.Err(); err != nil {
+		return err
+	}
+
+	// Schließe die ursprüngliche Datei
+	if err := file.Close(); err != nil {
+		return err
+	}
+
+	// Schließe die temporäre Datei
+	if err := tempFile.Close(); err != nil {
+		return err
+	}
+
+	// Lösche die ursprüngliche Datei
+	if err := os.Remove(filename); err != nil {
+		return err
+	}
+
+	// Benenne die temporäre Datei in den ursprünglichen Dateinamen um
+	if err := os.Rename(tempFilename, filename); err != nil {
+		return err
+	}
+
+	return nil
 }

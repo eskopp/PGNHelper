@@ -2,11 +2,7 @@ name: Windows
 
 on:
   push:
-    branches:
-      - main
   pull_request:
-    branches:
-      - main
 
 jobs:
   test:
@@ -113,6 +109,19 @@ jobs:
           .\pgn.exe -parseJSON games.json dummy.pgn
           ls
           type dummy.pgn
+      - name: Remove Event Date in PGN
+        working-directory: test
+        run: |
+          .\pgn.exe -EventDate parse.pgn
+          ls    
+          type parse.pgn
+
+      - name: Remove Event Date in JSON
+        working-directory: test
+        run: |
+          .\pgn.exe -EventDate test.json
+          ls           
+          type test.json 
 
       - name: Clean
         run: |
