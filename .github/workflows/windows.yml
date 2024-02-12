@@ -83,26 +83,21 @@ jobs:
 
       - name: Parse PGN to JSON with no JSON flag
         run: |
-          powershell del *.json
           pgn -parsePGN parse.pgn
           type parse.json
-          powershell del *.json
 
       - name: Parse PGN to JSON with JSON Flag
         run: |
-          powershell rm *.json
           pgn -parsePGN parse.pgn test.json
           type test.json
 
       - name: Parse JSON to PGN with no PGN flag
         run: |
-          powershell del *.pgn
           pgn -parseJSON test.json
           type test.pgn
 
       - name: Parse JSON to PGN with no PGN flag
         run: |
-          powershell del *.pgn
           pgn -parseJSON test.json dummy.pgn
           type dummy.pgn
 
